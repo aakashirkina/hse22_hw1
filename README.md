@@ -1,5 +1,5 @@
 # hse22_hw1
-# 1 часть
+## 1 часть
 1. Создание ссылок
 ```
 ln -s /usr/share/data-minor-bioinf/assembly/oil_R1.fastq
@@ -23,7 +23,6 @@ ls R*.fastq | xargs -P 4 -tI{} fastqc -o fastqc {}
 ```
 mkdir multiqc
 multiqc -o multiqc fastqc
-
 ```
 5. Обрезание чтений
 ```
@@ -52,13 +51,16 @@ time platanus gap_close -o Poil -c Poil_scaffold.fa -IP1 R1_paired_end.fastq.tri
 ```
 ## Отчеты multiQC
 Для исходных чтений
+
 ![avatar](/images/general_1.png)
 ![avatar](/images/per_sequence_1.png)
+
 Для подрезанных
+
 ![avatar](/images/general_2.png)
 ![avatar](/images/per_sequence_2.png)
 ## 2 часть
-1. Импорт библиотек
+1. Импорт библиотеки регулярных выражений
 ```
 import re
 ```
@@ -97,18 +99,17 @@ def analysis(path):
 ```
 contig = analysis("Poil_contig.fa")
 ```
-Общее количество: 606,
-Общая длина: 3923405,
-Максимальная длина: 179304,
+Общее количество: 606, <br>
+Общая длина: 3923405, <br>
+Максимальная длина: 179304, <br>
 N50: 48054
-
 4. Скаффолды
 ```
 scaffolds = analysis("Poil_scaffold.fa")
 ```
-Общее количество: 71,
-Общая длина: 3871958,
-Максимальная длина: 3831358,
+Общее количество: 71, <br>
+Общая длина: 3871958, <br>
+Максимальная длина: 3831358, <br>
 N50: 3831358
 
 5. Подсчет гэпов для необрезанных чтений
@@ -118,8 +119,8 @@ print(f"Общая длина: {scaffolds.count('N')}")
 scaffolds = re.sub(r"N{2,}", "N", scaffolds)
 print(f"Количество: {scaffolds.count('N')}")
 ```
-Гэпы:
-Общая длина: 6338
+Гэпы: <br>
+Общая длина: 6338 <br>
 Количество: 64
 
 6. Подсчет гэпов для обрезанных чтений
@@ -129,5 +130,5 @@ print(f"Общая длина для обрезанных чтений: {scaffol
 scaffold_closed = re.sub(r"N{2,}", "N", scaffold_closed)
 print(f"Количество для обрезанных чтений: {scaffold_closed.count('N')}")
 ```
-Общая длина для обрезанных чтений: 1740
+Общая длина для обрезанных чтений: 1740 <br>
 Количество для обрезанных чтений: 8
